@@ -26,6 +26,7 @@ export default class PaymentPageContainer extends Component {
 
 function mapStateToProps(state) {
     return {
-
+        productsList: state.productsList,
+        totalCount: state.totalCount
     };
 }
