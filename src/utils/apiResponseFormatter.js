@@ -1,53 +1,13 @@
-export function formatAccount(account) {
-    const formattedAccount =  {
-        id: account.id,
-        fullName: `${account.firstName} ${account.secondName}`,
-        avatarUrl: account.avatarUrl
-    };
+import moment from 'moment';
 
-    if (Object.keys(account.billingInfo).length) {
-        formattedAccount.billingInfo = { ...account.billingInfo };
-    } else {
-        formattedAccount.billingInfo = {
-            name: '',
-            email: '',
-            city: '',
-            country: '',
-            state: '',
-            address: '',
-            phoneNumber: '',
-            zipCode: ''
-        };
-    }
+export function formatProduct(product) {
+    const formattedAccount =  {
+        id: product.id,
+        name: product.name,
+        description: product.description,
+        color: product.color,
+        dateOfAddition: moment(product.createdAt).format('MMMM Do YYYY')
+    };
 
     return formattedAccount;
-}
-
-export function formatQuizSession(quizSession) {
-    const assigneeData = quizSession.assigneeData || {};
-    const quizSessionData = quizSession.quizSessionData;
-    const points = quizSessionData.gainedPoints === 0
-        ? 0
-        : Math.round(quizSessionData.gainedPoints / quizSessionData.maxPoints * 100);
-
-    return {
-        points,
-        id: quizSessionData.id,
-        assigneeAvatarUrl: assigneeData.avatarUrl,
-        assigneeName: `${assigneeData.firstName} ${assigneeData.secondName}`,
-        date: quizSessionData.finishedAt,
-        assigneeEmail: assigneeData.email,
-        isFinished: quizSessionData.status === 'FINISHED',
-        isPending: false
-    };
-}
-
-export function formatPendingsEntities(quizSession) {
-    return {
-        id: quizSession.email,
-        assigneeAvatarUrl: quizSession.avatarUrl,
-        assigneeEmail: quizSession.email,
-        isPending: true,
-        isFinished: false
-    };
 }
