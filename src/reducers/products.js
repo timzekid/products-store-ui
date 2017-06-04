@@ -5,6 +5,8 @@ import { formatError } from '../utils/errorFormatter.js';
 const DEFAULT_STATE = {
     productsList: [],
     totalCount: 0,
+    offset: 0,
+    limit: 6,
     errorDuringAddition: { isError: false }
 };
 
@@ -45,6 +47,12 @@ export default function products(state = DEFAULT_STATE, action) {
             console.error(`${ActionTypes.ADD_NEW_PRODUCT_FAIL} error`, action.error);
 
             return { ...state };
+        }
+        case ActionTypes.CHANGE_PRODUCTS_OFFSET: {
+            return {
+                ...state,
+                offset: action.payload.nextOffset
+            };
         }
         default:
             return state;

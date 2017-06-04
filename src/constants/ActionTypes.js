@@ -11,5 +11,6 @@ export default keyMirror({
     ADD_NEW_PRODUCT_REQUEST: undefined,
     ADD_NEW_PRODUCT_SUCCESS: undefined,
     ADD_NEW_PRODUCT_FAIL: undefined,
-    ADD_NEW_PRODUCT_FORMAT_ERROR: undefined
+    ADD_NEW_PRODUCT_FORMAT_ERROR: undefined,
+    CHANGE_PRODUCTS_OFFSET: undefined
 });

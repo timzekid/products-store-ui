@@ -2,10 +2,13 @@ import { Observable } from 'rxjs/Observable';
 
 import ActionTypes from '../constants/ActionTypes.js';
 
-export function listProductsRequest(action$) {
+export function listProductsRequest(action$, store) {
     return action$.ofType(ActionTypes.LIST_PRODUCTS_REQUEST)
-      .switchMap(() =>
-          Observable.ajax.getJSON('http://localhost:8080/api/v1/products')
+      .switchMap(() => {
+          const limit = store.getState().products.limit;
+          const offset = store.getState().products.offset;
+
+          return Observable.ajax.getJSON(`http://localhost:8080/api/v1/products?offset=${offset}&limit=${limit}`)
             .map(data => ({
                 type: ActionTypes.LIST_PRODUCTS_SUCCESS,
                 payload: { ...data }
@@ -15,8 +18,8 @@ export function listProductsRequest(action$) {
                     type: ActionTypes.LIST_PRODUCTS_FAIL,
                     error: { error }
                 }
-            ])
-    );
+            ]);
+      });
 }
 
 export function addNewProductRequest(action$) {
@@ -51,21 +54,24 @@ export function addNewProductRequest(action$) {
         );
 }
 
-export function refetchProductsAfterAddition(action$) {
+export function refetchProductsAfterAddition(action$, store) {
     return action$.ofType(ActionTypes.ADD_NEW_PRODUCT_SUCCESS)
-      .switchMap(() =>
-          Observable.ajax.getJSON('http://localhost:8080/api/v1/products')
-            .map(data => ({
-                type: ActionTypes.LIST_PRODUCTS_SUCCESS,
-                payload: { ...data }
-            }))
-            .catch(error => [
-                {
-                    type: ActionTypes.LIST_PRODUCTS_FAIL,
-                    error: { error }
-                }
-            ])
-    );
+        .switchMap(() => {
+            const limit = store.getState().products.limit;
+            const offset = store.getState().products.offset;
+
+            return Observable.ajax.getJSON(`http://localhost:8080/api/v1/products?offset=${offset}&limit=${limit}`)
+              .map(data => ({
+                  type: ActionTypes.LIST_PRODUCTS_SUCCESS,
+                  payload: { ...data }
+              }))
+              .catch(error => [
+                  {
+                      type: ActionTypes.LIST_PRODUCTS_FAIL,
+                      error: { error }
+                  }
+              ]);
+        });
 }
 
 export function closeProductsModalAfterAddition(action$) {

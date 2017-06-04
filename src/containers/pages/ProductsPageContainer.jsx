@@ -6,7 +6,8 @@ import {
     listProductsRequest,
     showAddProductModal,
     closeAddProductModal,
-    addNewProductRequest
+    addNewProductRequest,
+    changeProductsOffset
 } from '../../actions/products.js';
 
 import ProductsPage            from '../../components/pages/ProductsPage.jsx';
@@ -16,18 +17,44 @@ import ProductInteractionModal from '../../components/ProductInteractionModal.js
 export default class PaymentPageContainer extends Component {
     static propTypes = {
         errorDuringAddition    : PropTypes.object.isRequired,
+        location               : PropTypes.object.isRequired,
+        history                : PropTypes.object.isRequired,
         productsList           : PropTypes.array.isRequired,
         isAddProductModalShown : PropTypes.bool.isRequired,
+        isMoreThanOnePage      : PropTypes.bool.isRequired,
         productsTotalCount     : PropTypes.number,
+        limit                  : PropTypes.number.isRequired,
+        totalPagesNumber       : PropTypes.number.isRequired,
+        selectedPageNumber     : PropTypes.number.isRequired,
         listProductsRequest    : PropTypes.func.isRequired,
         addNewProductRequest   : PropTypes.func.isRequired,
         showAddProductModal    : PropTypes.func.isRequired,
-        closeAddProductModal   : PropTypes.func.isRequired
+        closeAddProductModal   : PropTypes.func.isRequired,
+        changeProductsOffset   : PropTypes.func.isRequired
     };
 
     componentWillMount() {
+        if (this.props.location.query.page) {
+            this.props.changeProductsOffset({ nextOffset: this.props.limit * this.props.location.query.page });
+        }
+
         this.props.listProductsRequest();
     }
+
+    componentWillReceiveProps(nextProps) {
+        if (this.props.location.search !== nextProps.location.search) {
+            this.props.listProductsRequest();
+        }
+    }
+
+    handlePageChange = ({ selected }) => {
+        this.props.history.push({
+            pathname: this.props.location.pathname,
+            query: { page: selected }
+        });
+
+        this.props.changeProductsOffset({ nextOffset: this.props.limit * selected });
+    };
 
     render() {
         const { isAddProductModalShown } = this.props;
@@ -37,7 +64,11 @@ export default class PaymentPageContainer extends Component {
                 <ProductsPage
                     productsList       = {this.props.productsList}
                     productsTotalCount = {this.props.productsTotalCount}
+                    isMoreThanOnePage  = {this.props.isMoreThanOnePage}
+                    selectedPageNumber = {this.props.selectedPageNumber}
+                    totalPagesNumber   = {this.props.totalPagesNumber}
                     onAddBtnClick      = {this.props.showAddProductModal}
+                    onPageChange       = {this.handlePageChange}
                 />
                 {
                     isAddProductModalShown
@@ -60,9 +91,21 @@ export default class PaymentPageContainer extends Component {
 }
 
 function mapStateToProps(state) {
+    const total = state.products.totalCount;
+    const limit = state.products.limit;
+    const offset = state.products.offset;
+
+    const isMoreThanOnePage = total > limit;
+    const totalPagesNumber = Math.ceil(total / limit);
+    const selectedPageNumber = offset / limit;
+
     return {
+        isMoreThanOnePage,
+        totalPagesNumber,
+        selectedPageNumber,
+        limit,
         productsList           : state.products.productsList,
-        productsTotalCount     : state.products.totalCount,
+        productsTotalCount     : total,
         errorDuringAddition    : state.products.errorDuringAddition,
         isAddProductModalShown : state.modals.isAddProductModalShown
     };
@@ -72,6 +115,7 @@ function mapDispatchToProps(dispatch) {
     return {
         listProductsRequest  : bindActionCreators(listProductsRequest, dispatch),
         addNewProductRequest : bindActionCreators(addNewProductRequest, dispatch),
+        changeProductsOffset : bindActionCreators(changeProductsOffset, dispatch),
         showAddProductModal  : bindActionCreators(showAddProductModal, dispatch),
         closeAddProductModal : bindActionCreators(closeAddProductModal, dispatch)
     };

@@ -1,4 +1,5 @@
 @import '../../assets/mixins.less';
+@import '../../assets/palette.less';
 
 .pageWrapper {
     .pageWrapper;
@@ -18,4 +19,40 @@
 
 .fab {
     .fab;
+}
+
+.paginationContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.paginationPage {
+    width: 35px;
+    height: 35px;
+    margin-left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    a {
+        color: @text-color;
+    }
+}
+
+.paginationActivePage {
+    background: @primary-color-1;
+
+    a {
+        color: #fff;
+    }
+}
+
+.paginationPrev, .paginationNext {
+    display: none;
 }

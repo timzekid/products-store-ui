@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react';
+import ReactPaginate                   from 'react-paginate';
 import FloatingActionButton            from 'material-ui/FloatingActionButton';
 import ContentAdd                      from 'material-ui/svg-icons/content/add';
 
@@ -8,8 +9,12 @@ import styles from './ProductsPage.less';
 
 export default class ProductsPage extends Component {
     static propTypes = {
-        productsList: PropTypes.array.isRequired,
-        onAddBtnClick: PropTypes.func.isRequired
+        productsList       : PropTypes.array.isRequired,
+        isMoreThanOnePage  : PropTypes.bool.isRequired,
+        selectedPageNumber : PropTypes.number.isRequired,
+        totalPagesNumber   : PropTypes.number.isRequired,
+        onAddBtnClick      : PropTypes.func.isRequired,
+        onPageChange       : PropTypes.func.isRequired
     };
 
     render() {
@@ -38,6 +43,25 @@ export default class ProductsPage extends Component {
                     >
                         <ContentAdd />
                     </FloatingActionButton>
+
+                    {
+                        this.props.isMoreThanOnePage
+                        ?
+                            <ReactPaginate
+                                marginPagesDisplayed = {2}
+                                pageRangeDisplayed   = {3}
+                                containerClassName   = {styles.paginationContainer}
+                                pageClassName        = {styles.paginationPage}
+                                previousClassName    = {styles.paginationPrev}
+                                nextClassName        = {styles.paginationNext}
+                                activeClassName      = {styles.paginationActivePage}
+                                forceSelected        = {this.props.selectedPageNumber}
+                                pageNum              = {this.props.totalPagesNumber}
+                                clickCallback        = {this.props.onPageChange}
+                            />
+                        :
+                            null
+                    }
                 </div>
             </div>
         );

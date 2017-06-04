@@ -15,3 +15,7 @@ export function closeAddProductModal() {
 export function addNewProductRequest(payload) {
     return { type : ActionTypes.ADD_NEW_PRODUCT_REQUEST, payload };
 }
+
+export function changeProductsOffset(payload) {
+    return { type : ActionTypes.CHANGE_PRODUCTS_OFFSET, payload };
+}
