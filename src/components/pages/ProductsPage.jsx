@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import ReactPaginate                   from 'react-paginate';
 import FloatingActionButton            from 'material-ui/FloatingActionButton';
-import ContentAdd                      from 'material-ui/svg-icons/content/add';
+import ContentAddIcon                  from 'material-ui/svg-icons/content/add';
 
 import ProductCard from '../ProductCard.jsx';
 
@@ -14,6 +14,7 @@ export default class ProductsPage extends Component {
         selectedPageNumber : PropTypes.number.isRequired,
         totalPagesNumber   : PropTypes.number.isRequired,
         onAddBtnClick      : PropTypes.func.isRequired,
+        onExploreBtnClick  : PropTypes.func.isRequired,
         onPageChange       : PropTypes.func.isRequired
     };
 
@@ -29,11 +30,13 @@ export default class ProductsPage extends Component {
                     <div className={styles.productsContainer}>
                         {
                             productsList.map(product =>
-                                <ProductCard
-                                    key            = {product.id}
-                                    name           = {product.name}
-                                    description    = {product.description}
-                                    dateOfAddition = {product.dateOfAddition}
+                                <ProductCard previewMode
+                                    key               = {product.id}
+                                    id                = {product.id}
+                                    name              = {product.name}
+                                    description       = {product.description}
+                                    dateOfAddition    = {product.dateOfAddition}
+                                    onExploreBtnClick = {this.props.onExploreBtnClick}
                                 />
                             )
                         }
@@ -42,7 +45,7 @@ export default class ProductsPage extends Component {
                         className = {styles.fab}
                         onClick   = {onAddBtnClick}
                     >
-                        <ContentAdd />
+                        <ContentAddIcon />
                     </FloatingActionButton>
 
                     {

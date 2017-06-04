@@ -19,3 +19,7 @@ export function addNewProductRequest(payload) {
 export function changeProductsOffset(payload) {
     return { type : ActionTypes.CHANGE_PRODUCTS_OFFSET, payload };
 }
+
+export function showProductRequest(payload) {
+    return { type : ActionTypes.SHOW_PRODUCT_REQUEST, payload };
+}

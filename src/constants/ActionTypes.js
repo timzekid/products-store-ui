@@ -8,9 +8,13 @@ export default keyMirror({
     SHOW_ADD_PRODUCT_MODAL  : undefined,
     CLOSE_ADD_PRODUCT_MODAL : undefined,
 
-    ADD_NEW_PRODUCT_REQUEST: undefined,
-    ADD_NEW_PRODUCT_SUCCESS: undefined,
-    ADD_NEW_PRODUCT_FAIL: undefined,
-    ADD_NEW_PRODUCT_FORMAT_ERROR: undefined,
-    CHANGE_PRODUCTS_OFFSET: undefined
+    ADD_NEW_PRODUCT_REQUEST      : undefined,
+    ADD_NEW_PRODUCT_SUCCESS      : undefined,
+    ADD_NEW_PRODUCT_FAIL         : undefined,
+    ADD_NEW_PRODUCT_FORMAT_ERROR : undefined,
+    CHANGE_PRODUCTS_OFFSET       : undefined,
+
+    SHOW_PRODUCT_REQUEST: undefined,
+    SHOW_PRODUCT_SUCCESS: undefined,
+    SHOW_PRODUCT_FAIL: undefined
 });

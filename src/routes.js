@@ -10,7 +10,7 @@ export default (
     <Route path='/' component={App}>
         <IndexRoute component={ProductsPageContainer} />
 
-        <Route path='/products:id' component={ProductPageContainer} />
+        <Route path='/products/:id' component={ProductPageContainer} />
         <Route path='/addproduct' component={AddProductPageContainer} />
 
         <Redirect from='*' to='/' />

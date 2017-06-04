@@ -78,3 +78,20 @@ export function closeProductsModalAfterAddition(action$) {
     return action$.ofType(ActionTypes.ADD_NEW_PRODUCT_SUCCESS)
         .mapTo({ type: ActionTypes.CLOSE_ADD_PRODUCT_MODAL });
 }
+
+export function showProductRequest(action$) {
+    return action$.ofType(ActionTypes.SHOW_PRODUCT_REQUEST)
+      .switchMap((action) =>
+          Observable.ajax.getJSON(`http://localhost:8080/api/v1/products/${action.payload.id}`)
+            .map(data => ({
+                type: ActionTypes.SHOW_PRODUCT_SUCCESS,
+                payload: { ...data }
+            }))
+            .catch(error => [
+                {
+                    type: ActionTypes.SHOW_PRODUCT_FAIL,
+                    error: { error }
+                }
+            ])
+      );
+}

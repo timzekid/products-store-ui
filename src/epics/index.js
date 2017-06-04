@@ -3,12 +3,14 @@ import {
     listProductsRequest,
     addNewProductRequest,
     refetchProductsAfterAddition,
-    closeProductsModalAfterAddition
+    closeProductsModalAfterAddition,
+    showProductRequest
 } from './products.js';
 
 export default combineEpics(
     listProductsRequest,
     addNewProductRequest,
     refetchProductsAfterAddition,
-    closeProductsModalAfterAddition
+    closeProductsModalAfterAddition,
+    showProductRequest
 );

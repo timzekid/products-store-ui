@@ -1,6 +1,13 @@
 @import '../assets/palette.less';
 
 .paper {
+    width: 400px;
+    min-height: 300px;
+    margin-bottom: 40px;
+    padding-bottom: 15px;
+}
+
+.miniPaper {
     max-width: 250px;
     width: 250px;
     height: 200px;
@@ -15,6 +22,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .content {
@@ -29,4 +37,16 @@
 
 .date {
     color: @primary-color-3;
+}
+
+.subHeader {
+    color: @accent-color;
+    font-size: 16px;
+    margin: 20px 0 10px;
+}
+
+.fab {
+    position: absolute !important;
+    right: 50px;
+    bottom: -25px;
 }

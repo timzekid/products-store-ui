@@ -25,6 +25,12 @@ export default function products(state = DEFAULT_STATE, action) {
 
             return { ...state };
         }
+        case ActionTypes.CHANGE_PRODUCTS_OFFSET: {
+            return {
+                ...state,
+                offset: action.payload.nextOffset
+            };
+        }
 
 
         case ActionTypes.ADD_NEW_PRODUCT_FORMAT_ERROR: {
@@ -48,11 +54,18 @@ export default function products(state = DEFAULT_STATE, action) {
 
             return { ...state };
         }
-        case ActionTypes.CHANGE_PRODUCTS_OFFSET: {
+
+
+        case ActionTypes.SHOW_PRODUCT_SUCCESS: {
             return {
                 ...state,
-                offset: action.payload.nextOffset
+                productsList: [ formatProduct(action.payload.data) ]
             };
+        }
+        case ActionTypes.SHOW_PRODUCT_FAIL: {
+            console.error(`${ActionTypes.SHOW_PRODUCT_FAIL} error`, action.error);
+
+            return { ...state };
         }
         default:
             return state;

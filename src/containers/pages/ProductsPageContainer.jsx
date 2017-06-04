@@ -56,6 +56,10 @@ export default class PaymentPageContainer extends Component {
         this.props.changeProductsOffset({ nextOffset: this.props.limit * selected });
     };
 
+    handleExploreBtnClick = (productId) => {
+        this.props.history.push(`/products/${productId}`);
+    };
+
     render() {
         const { isAddProductModalShown } = this.props;
 
@@ -69,6 +73,7 @@ export default class PaymentPageContainer extends Component {
                     totalPagesNumber   = {this.props.totalPagesNumber}
                     onAddBtnClick      = {this.props.showAddProductModal}
                     onPageChange       = {this.handlePageChange}
+                    onExploreBtnClick  = {this.handleExploreBtnClick}
                 />
                 {
                     isAddProductModalShown
