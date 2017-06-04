@@ -1,14 +1,16 @@
 import { createStore, applyMiddleware } from 'redux';
 import { createEpicMiddleware } from 'redux-observable';
 
-import productsReducer from '../reducers/products.js';
-import rootEpic        from '../epics';
+import rootReducer from '../reducers';
+import rootEpic    from '../epics';
+
+console.log('rootReducer', rootReducer);
 
 const epicMiddleware = createEpicMiddleware(rootEpic);
 
 export default function configureStore() {
     return createStore(
-        productsReducer,
+        rootReducer,
         applyMiddleware(epicMiddleware)
     );
 }

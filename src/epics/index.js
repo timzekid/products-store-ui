@@ -1,6 +1,14 @@
 import { combineEpics } from 'redux-observable';
-import { listProductsRequest } from './products.js';
+import {
+    listProductsRequest,
+    addNewProductRequest,
+    refetchProductsAfterAddition,
+    closeProductsModalAfterAddition
+} from './products.js';
 
 export default combineEpics(
-    listProductsRequest
+    listProductsRequest,
+    addNewProductRequest,
+    refetchProductsAfterAddition,
+    closeProductsModalAfterAddition
 );

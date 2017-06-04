@@ -1,3 +1,7 @@
 {
-    "extends": "webbylab"
+    "extends": "webbylab",
+
+    "rules": {
+        "react/jsx-handler-names": "off"
+    }
 }

@@ -1,7 +1,17 @@
 import ActionTypes from '../constants/ActionTypes.js';
 
 export function listProductsRequest() {
-    return {
-        type : ActionTypes.LIST_PRODUCTS_REQUEST
-    };
+    return { type : ActionTypes.LIST_PRODUCTS_REQUEST };
+}
+
+export function showAddProductModal() {
+    return { type : ActionTypes.SHOW_ADD_PRODUCT_MODAL };
+}
+
+export function closeAddProductModal() {
+    return { type : ActionTypes.CLOSE_ADD_PRODUCT_MODAL };
+}
+
+export function addNewProductRequest(payload) {
+    return { type : ActionTypes.ADD_NEW_PRODUCT_REQUEST, payload };
 }

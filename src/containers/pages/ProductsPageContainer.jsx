@@ -1,43 +1,75 @@
 import React, { Component, PropTypes } from 'react';
 import { connect }                     from 'react-redux';
+import { bindActionCreators }          from 'redux';
 
-import { listProductsRequest } from '../../actions/products.js';
+import {
+    listProductsRequest,
+    showAddProductModal,
+    closeAddProductModal,
+    addNewProductRequest
+} from '../../actions/products.js';
 
-import ProductsPage from '../../components/pages/ProductsPage.jsx';
+import ProductsPage            from '../../components/pages/ProductsPage.jsx';
+import ProductInteractionModal from '../../components/ProductInteractionModal.jsx';
 
-@connect(mapStateToProps, null)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class PaymentPageContainer extends Component {
     static propTypes = {
-        productsList: PropTypes.array.isRequired,
-        productsTotalCount: PropTypes.number,
-        dispatch: PropTypes.func.isRequired
+        productsList           : PropTypes.array.isRequired,
+        isAddProductModalShown : PropTypes.bool.isRequired,
+        productsTotalCount     : PropTypes.number,
+        listProductsRequest    : PropTypes.func.isRequired,
+        addNewProductRequest   : PropTypes.func.isRequired,
+        showAddProductModal    : PropTypes.func.isRequired,
+        closeAddProductModal   : PropTypes.func.isRequired
     };
 
     componentWillMount() {
-        const { dispatch } = this.props;
-
-        dispatch(listProductsRequest());
+        this.props.listProductsRequest();
     }
 
     render() {
-        const {
-            productsList,
-            productsTotalCount
-        } = this.props;
+        const { isAddProductModalShown } = this.props;
 
         return (
-            <ProductsPage
-                productsList={productsList}
-                productsTotalCount={productsTotalCount}
-            />
+            <div>
+                <ProductsPage
+                    productsList       = {this.props.productsList}
+                    productsTotalCount = {this.props.productsTotalCount}
+                    onAddBtnClick      = {this.props.showAddProductModal}
+                />
+                {
+                    isAddProductModalShown
+                    ?
+                        <ProductInteractionModal
+                            isOpen           = {isAddProductModalShown}
+                            title            = 'Add new product'
+                            submitBtnLabel   = 'Add product'
+                            cancelBtnLabel   = 'Cancel'
+                            onSubmitBtnClick = {this.props.addNewProductRequest}
+                            onCancelBtnClick = {this.props.closeAddProductModal}
+                        />
+                    :
+                        null
+                }
+            </div>
         );
     }
 }
 
 function mapStateToProps(state) {
-    console.log('state', state);
     return {
-        productsList: state.productsList,
-        productsTotalCount: state.totalCount
+        productsList           : state.products.productsList,
+        productsTotalCount     : state.products.totalCount,
+        isAddProductModalShown : state.modals.isAddProductModalShown
+    };
+}
+
+function mapDispatchToProps(dispatch) {
+    return {
+        listProductsRequest  : bindActionCreators(listProductsRequest, dispatch),
+        addNewProductRequest : bindActionCreators(addNewProductRequest, dispatch),
+        showAddProductModal  : bindActionCreators(showAddProductModal, dispatch),
+        closeAddProductModal : bindActionCreators(closeAddProductModal, dispatch)
     };
 }

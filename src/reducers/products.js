@@ -16,6 +16,17 @@ export default function products(state = DEFAULT_STATE, action) {
                 totalCount: action.payload.meta.totalCount
             };
         }
+        case ActionTypes.LIST_PRODUCTS_FAIL: {
+            console.error(`${ActionTypes.LIST_PRODUCTS_FAIL} error`, action.error);
+
+            return { ...state };
+        }
+
+        case ActionTypes.ADD_NEW_PRODUCT_FAIL: {
+            console.error(`${ActionTypes.ADD_NEW_PRODUCT_FAIL} error`, action.error);
+
+            return { ...state };
+        }
         default:
             return state;
     }
