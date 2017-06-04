@@ -8,11 +8,19 @@ export default keyMirror({
     SHOW_ADD_PRODUCT_MODAL  : undefined,
     CLOSE_ADD_PRODUCT_MODAL : undefined,
 
+    SHOW_EDIT_PRODUCT_MODAL  : undefined,
+    CLOSE_EDIT_PRODUCT_MODAL : undefined,
+
     ADD_NEW_PRODUCT_REQUEST      : undefined,
     ADD_NEW_PRODUCT_SUCCESS      : undefined,
     ADD_NEW_PRODUCT_FAIL         : undefined,
     ADD_NEW_PRODUCT_FORMAT_ERROR : undefined,
     CHANGE_PRODUCTS_OFFSET       : undefined,
+
+    UPDATE_PRODUCT_REQUEST      : undefined,
+    UPDATE_PRODUCT_SUCCESS      : undefined,
+    UPDATE_PRODUCT_FAIL         : undefined,
+    UPDATE_PRODUCT_FORMAT_ERROR : undefined,
 
     SHOW_PRODUCT_REQUEST : undefined,
     SHOW_PRODUCT_SUCCESS : undefined,

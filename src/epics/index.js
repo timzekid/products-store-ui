@@ -5,7 +5,10 @@ import {
     refetchProductsAfterAddition,
     closeProductsModalAfterAddition,
     showProductRequest,
-    deleteProductRequest
+    deleteProductRequest,
+    updateProductRequest,
+    closeProductsModalAfterEdition,
+    refetchProductAfterEdition
 } from './products.js';
 
 export default combineEpics(
@@ -14,5 +17,8 @@ export default combineEpics(
     refetchProductsAfterAddition,
     closeProductsModalAfterAddition,
     showProductRequest,
-    deleteProductRequest
+    deleteProductRequest,
+    updateProductRequest,
+    closeProductsModalAfterEdition,
+    refetchProductAfterEdition
 );

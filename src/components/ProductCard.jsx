@@ -15,7 +15,8 @@ export default class ProductCard extends Component {
         color             : PropTypes.string,
         dateOfAddition    : PropTypes.string,
         onExploreBtnClick : PropTypes.func.isRequired,
-        onDeleteBtnClick  : PropTypes.func.isRequired
+        onDeleteBtnClick  : PropTypes.func.isRequired,
+        onEditBtnClick    : PropTypes.func.isRequired
     };
 
     renderContentPreview = () => {
@@ -63,7 +64,7 @@ export default class ProductCard extends Component {
         return (
             <FloatingActionButton secondary
                 className = {styles.fab}
-                // onClick   = {onAddBtnClick}
+                onClick   = {this.props.onEditBtnClick}
             >
                 <ModeEditIcon />
             </FloatingActionButton>

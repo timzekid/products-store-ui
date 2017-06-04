@@ -115,3 +115,57 @@ export function deleteProductRequest(action$) {
             ])
       );
 }
+
+export function updateProductRequest(action$) {
+    return action$.ofType(ActionTypes.UPDATE_PRODUCT_REQUEST)
+        .switchMap(action =>
+            Observable.ajax({
+                body: JSON.stringify({ data: action.payload }),
+                method: 'PUT',
+                responseType: 'json',
+                url: `http://localhost:8080/api/v1/products/${action.payload.id}`,
+                headers: { 'Content-Type': 'application/json' }
+            })
+            .map(data => {
+                if (data.response.error) {
+                    return {
+                        type: ActionTypes.UPDATE_PRODUCT_FORMAT_ERROR,
+                        error: { ...data.response.error }
+                    };
+                }
+
+                return {
+                    type: ActionTypes.UPDATE_PRODUCT_SUCCESS,
+                    payload: { ...data.response.data }
+                };
+            })
+            .catch(error => [
+                {
+                    type: ActionTypes.UPDATE_PRODUCT_FAIL,
+                    error: { error }
+                }
+            ])
+        );
+}
+
+export function closeProductsModalAfterEdition(action$) {
+    return action$.ofType(ActionTypes.UPDATE_PRODUCT_SUCCESS)
+        .mapTo({ type: ActionTypes.CLOSE_EDIT_PRODUCT_MODAL });
+}
+
+export function refetchProductAfterEdition(action$) {
+    return action$.ofType(ActionTypes.UPDATE_PRODUCT_SUCCESS)
+      .switchMap((action) =>
+          Observable.ajax.getJSON(`http://localhost:8080/api/v1/products/${action.payload.id}`)
+            .map(data => ({
+                type: ActionTypes.SHOW_PRODUCT_SUCCESS,
+                payload: { ...data }
+            }))
+            .catch(error => [
+                {
+                    type: ActionTypes.SHOW_PRODUCT_FAIL,
+                    error: { error }
+                }
+            ])
+      );
+}

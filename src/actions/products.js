@@ -27,3 +27,15 @@ export function showProductRequest(payload) {
 export function deleteProductRequest(payload) {
     return { type : ActionTypes.DELETE_PRODUCT_REQUEST, payload };
 }
+
+export function showEditProductModal() {
+    return { type : ActionTypes.SHOW_EDIT_PRODUCT_MODAL };
+}
+
+export function closeEditProductModal() {
+    return { type : ActionTypes.CLOSE_EDIT_PRODUCT_MODAL };
+}
+
+export function updateProductRequest(payload) {
+    return { type : ActionTypes.UPDATE_PRODUCT_REQUEST, payload };
+}

@@ -7,7 +7,8 @@ const DEFAULT_STATE = {
     totalCount: 0,
     offset: 0,
     limit: 6,
-    errorDuringAddition: { isError: false }
+    errorDuringAddition: { isError: false },
+    errorDuringEdition: { isError: false }
 };
 
 export default function products(state = DEFAULT_STATE, action) {
@@ -68,10 +69,34 @@ export default function products(state = DEFAULT_STATE, action) {
             return { ...state };
         }
 
+
         case ActionTypes.DELETE_PRODUCT_FAIL: {
             console.error(`${ActionTypes.DELETE_PRODUCT_FAIL} error`, action.error);
 
             return { ...state };
+        }
+
+
+        case ActionTypes.UPDATE_PRODUCT_FORMAT_ERROR: {
+            console.error(`${ActionTypes.UPDATE_PRODUCT_FORMAT_ERROR} error`, action.error);
+
+            const formattedError = formatError(action.error);
+
+            return {
+                ...state,
+                errorDuringEdition: formattedError
+            };
+        }
+        case ActionTypes.UPDATE_PRODUCT_FAIL: {
+            console.error(`${ActionTypes.UPDATE_PRODUCT_FAIL} error`, action.error);
+
+            return { ...state };
+        }
+        case ActionTypes.CLOSE_EDIT_PRODUCT_MODAL: {
+            return {
+                ...state,
+                errorDuringEdition: { isError: false }
+            };
         }
         default:
             return state;

@@ -6,8 +6,9 @@ import styles from './ProductPage.less';
 
 export default class ProductPage extends Component {
     static propTypes = {
-        productInfo: PropTypes.object.isRequired,
-        onDeleteBtnClick: PropTypes.func.isRequired
+        productInfo      : PropTypes.object.isRequired,
+        onDeleteBtnClick : PropTypes.func.isRequired,
+        onEditBtnClick   : PropTypes.func.isRequired
     };
 
     render() {
@@ -29,6 +30,7 @@ export default class ProductPage extends Component {
                         dateOfAddition    = {dateOfAddition}
                         color             = {color}
                         onDeleteBtnClick  = {this.props.onDeleteBtnClick}
+                        onEditBtnClick    = {this.props.onEditBtnClick}
                     />
                 </div>
             </div>

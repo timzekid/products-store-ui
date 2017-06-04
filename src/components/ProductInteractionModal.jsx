@@ -12,14 +12,28 @@ const BLUE_COLOR_LABEL = 'BLUE';
 
 export default class ProductInteractionModal extends Component {
     static propTypes = {
-        error            : PropTypes.object.isRequired,
-        isOpen           : PropTypes.bool.isRequired,
-        title            : PropTypes.string.isRequired,
-        cancelBtnLabel   : PropTypes.string.isRequired,
-        submitBtnLabel   : PropTypes.string.isRequired,
-        onCancelBtnClick : PropTypes.func.isRequired,
-        onSubmitBtnClick : PropTypes.func.isRequired
+        error                 : PropTypes.object.isRequired,
+        isOpen                : PropTypes.bool.isRequired,
+        title                 : PropTypes.string.isRequired,
+        productId             : PropTypes.string.isRequired,
+        nameInputValue        : PropTypes.string.isRequired,
+        descriptionInputValue : PropTypes.string.isRequired,
+        selectedColorValue    : PropTypes.string.isRequired,
+        cancelBtnLabel        : PropTypes.string.isRequired,
+        submitBtnLabel        : PropTypes.string.isRequired,
+        onCancelBtnClick      : PropTypes.func.isRequired,
+        onSubmitBtnClick      : PropTypes.func.isRequired
     };
+
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            nameInputValue: props.nameInputValue || '',
+            descriptionInputValue: props.descriptionInputValue || '',
+            selectedColorValue: props.selectedColorValue || RED_COLOR_LABEL
+        };
+    }
 
     state = {
         nameInputValue: '',
@@ -43,12 +57,15 @@ export default class ProductInteractionModal extends Component {
         this.props.onSubmitBtnClick({
             name: this.state.nameInputValue,
             description: this.state.descriptionInputValue,
-            color: this.state.selectedColorValue
+            color: this.state.selectedColorValue,
+            id: this.props.productId
         });
     };
 
     render() {
         const { error, onCancelBtnClick } = this.props;
+
+        console.log('error', error);
 
         const actions = [
             <FlatButton
