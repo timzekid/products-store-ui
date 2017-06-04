@@ -18,6 +18,17 @@ export default class ProductsPage extends Component {
         onPageChange       : PropTypes.func.isRequired
     };
 
+    renderEmptyMessage = () => {
+        return (
+            <div>
+                <span className={styles.emptyMessageHeader}>Press green button at the bottom and add a first
+                    product</span>
+                <span className={styles.emptyMessageSubHeader}>Add <span className={styles.emphasis}>more than 6 </span>
+                     to reveal pagination :)</span>
+            </div>
+        );
+    };
+
     render() {
         const {
             productsList,
@@ -27,6 +38,13 @@ export default class ProductsPage extends Component {
         return (
             <div className={styles.pageWrapper}>
                 <div className={styles.pageContainer}>
+                    {
+                        !productsList.length
+                        ?
+                            this.renderEmptyMessage()
+                        :
+                            null
+                    }
                     <div className={styles.productsContainer}>
                         {
                             productsList.map(product =>
