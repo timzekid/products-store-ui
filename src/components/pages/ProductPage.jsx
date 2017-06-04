@@ -6,10 +6,13 @@ import styles from './ProductPage.less';
 
 export default class ProductPage extends Component {
     static propTypes = {
+        productInfo: PropTypes.object.isRequired,
+        onDeleteBtnClick: PropTypes.func.isRequired
     };
 
     render() {
         const {
+            id,
             name,
             description,
             dateOfAddition,
@@ -20,10 +23,12 @@ export default class ProductPage extends Component {
             <div className={styles.pageWrapper}>
                 <div className={styles.pageContainer}>
                     <ProductCard
+                        id                = {id}
                         name              = {name}
                         description       = {description}
                         dateOfAddition    = {dateOfAddition}
                         color             = {color}
+                        onDeleteBtnClick  = {this.props.onDeleteBtnClick}
                     />
                 </div>
             </div>

@@ -14,7 +14,11 @@ export default keyMirror({
     ADD_NEW_PRODUCT_FORMAT_ERROR : undefined,
     CHANGE_PRODUCTS_OFFSET       : undefined,
 
-    SHOW_PRODUCT_REQUEST: undefined,
-    SHOW_PRODUCT_SUCCESS: undefined,
-    SHOW_PRODUCT_FAIL: undefined
+    SHOW_PRODUCT_REQUEST : undefined,
+    SHOW_PRODUCT_SUCCESS : undefined,
+    SHOW_PRODUCT_FAIL    : undefined,
+
+    DELETE_PRODUCT_REQUEST: undefined,
+    DELETE_PRODUCT_SUCCESS: undefined,
+    DELETE_PRODUCT_FAIL: undefined
 });

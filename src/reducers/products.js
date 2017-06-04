@@ -67,6 +67,12 @@ export default function products(state = DEFAULT_STATE, action) {
 
             return { ...state };
         }
+
+        case ActionTypes.DELETE_PRODUCT_FAIL: {
+            console.error(`${ActionTypes.DELETE_PRODUCT_FAIL} error`, action.error);
+
+            return { ...state };
+        }
         default:
             return state;
     }

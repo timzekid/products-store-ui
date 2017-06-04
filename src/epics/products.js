@@ -95,3 +95,23 @@ export function showProductRequest(action$) {
             ])
       );
 }
+
+export function deleteProductRequest(action$) {
+    return action$.ofType(ActionTypes.DELETE_PRODUCT_REQUEST)
+      .switchMap(action =>
+          Observable.ajax({
+              method: 'DELETE',
+              url: `http://localhost:8080/api/v1/products/${action.payload.id}`
+          })
+            .map(data => ({
+                type: ActionTypes.DELETE_PRODUCT_SUCCESS,
+                payload: { ...data }
+            }))
+            .catch(error => [
+                {
+                    type: ActionTypes.DELETE_PRODUCT_FAIL,
+                    error: { error }
+                }
+            ])
+      );
+}

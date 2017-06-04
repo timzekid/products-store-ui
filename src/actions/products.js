@@ -23,3 +23,7 @@ export function changeProductsOffset(payload) {
 export function showProductRequest(payload) {
     return { type : ActionTypes.SHOW_PRODUCT_REQUEST, payload };
 }
+
+export function deleteProductRequest(payload) {
+    return { type : ActionTypes.DELETE_PRODUCT_REQUEST, payload };
+}

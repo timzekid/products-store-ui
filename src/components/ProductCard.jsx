@@ -11,9 +11,11 @@ export default class ProductCard extends Component {
         previewMode       : PropTypes.bool.isRequired,
         name              : PropTypes.string.isRequired,
         id                : PropTypes.string.isRequired,
-        description       : PropTypes.string.isRequired,
+        description       : PropTypes.string,
+        color             : PropTypes.string,
         dateOfAddition    : PropTypes.string,
-        onExploreBtnClick : PropTypes.func.isRequired
+        onExploreBtnClick : PropTypes.func.isRequired,
+        onDeleteBtnClick  : PropTypes.func.isRequired
     };
 
     renderContentPreview = () => {
@@ -52,6 +54,7 @@ export default class ProductCard extends Component {
                 primary
                 className = {styles.exploreBtn}
                 label     = 'Delete product'
+                onClick   = {this.props.onDeleteBtnClick.bind(null, { id: this.props.id })}
             />
         );
     };

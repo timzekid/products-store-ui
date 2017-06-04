@@ -3,7 +3,8 @@ import { connect }                     from 'react-redux';
 import { bindActionCreators }          from 'redux';
 
 import {
-    showProductRequest
+    showProductRequest,
+    deleteProductRequest
 } from '../../actions/products.js';
 
 import ProductPage from '../../components/pages/ProductPage.jsx';
@@ -11,21 +12,35 @@ import ProductPage from '../../components/pages/ProductPage.jsx';
 @connect(mapStateToProps, mapDispatchToProps)
 export default class ProductPageContainer extends Component {
     static propTypes = {
+        history              : PropTypes.object.isRequired,
+        params               : PropTypes.object.isRequired,
+        productInfo          : PropTypes.object.isRequired,
+        showProductRequest   : PropTypes.func.isRequired,
+        deleteProductRequest : PropTypes.func.isRequired
     };
 
     componentWillMount() {
         this.props.showProductRequest({ id: this.props.params.id });
     }
 
+    handleDeleteBtnClick = (payload) => {
+        this.props.history.push('/');
+
+        this.props.deleteProductRequest(payload);
+    };
+
     render() {
-        if (!this.props.productInfo) {
+        const { productInfo } = this.props;
+
+        if (!productInfo) {
             return (<span>Loading...</span>);
         }
 
         return (
             <div>
                 <ProductPage
-                    productInfo={this.props.productInfo}
+                    productInfo={productInfo}
+                    onDeleteBtnClick={this.handleDeleteBtnClick}
                 />
             </div>
         );
@@ -40,6 +55,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        showProductRequest : bindActionCreators(showProductRequest, dispatch)
+        showProductRequest   : bindActionCreators(showProductRequest, dispatch),
+        deleteProductRequest : bindActionCreators(deleteProductRequest, dispatch)
     };
 }
