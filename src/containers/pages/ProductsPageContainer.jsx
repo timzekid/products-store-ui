@@ -43,7 +43,7 @@ export default class PaymentPageContainer extends Component {
 
     componentWillReceiveProps(nextProps) {
         if (this.props.location.search !== nextProps.location.search) {
-            this.props.listProductsRequest();
+            this.refetchProductsList(nextProps);
         }
     }
 
@@ -58,6 +58,18 @@ export default class PaymentPageContainer extends Component {
 
     handleExploreBtnClick = (productId) => {
         this.props.history.push(`/products/${productId}`);
+    };
+
+    refetchProductsList = (nextProps) => {
+        const pageFromQuery = nextProps.location.query.page || 0;
+
+        const nextOffset = pageFromQuery * nextProps.limit;
+
+        nextProps.listProductsRequest({ offset: nextOffset });
+
+        if (nextOffset !== nextProps.offset) {
+            nextProps.changeProductsOffset({ nextOffset });
+        }
     };
 
     render() {

@@ -4,9 +4,9 @@ import ActionTypes from '../constants/ActionTypes.js';
 
 export function listProductsRequest(action$, store) {
     return action$.ofType(ActionTypes.LIST_PRODUCTS_REQUEST)
-      .switchMap(() => {
+      .switchMap((action) => {
           const limit = store.getState().products.limit;
-          const offset = store.getState().products.offset;
+          const offset = action.payload ? action.payload.offset : store.getState().products.offset;
 
           return Observable.ajax.getJSON(`http://localhost:8080/api/v1/products?offset=${offset}&limit=${limit}`)
             .map(data => ({
