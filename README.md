@@ -45,3 +45,10 @@ $ npm run devserver
 - ES6/7
 - Also validation of forms and pagination were implemented
 
+
+---
+### Some screenshots
+![Scr1](https://raw.githubusercontent.com/yaDaryStil/products-store-ui/master/public/static/screenshots/1.png)
+![Scr2](https://raw.githubusercontent.com/yaDaryStil/products-store-ui/master/public/static/screenshots/2.png)
+![Scr3](https://raw.githubusercontent.com/yaDaryStil/products-store-ui/master/public/static/screenshots/3.png)
+
