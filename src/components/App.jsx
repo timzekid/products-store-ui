@@ -2,9 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import MuiThemeProvider                from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin            from 'react-tap-event-plugin';
 import getMuiTheme                     from 'material-ui/styles/getMuiTheme';
-// import AppBar from 'material-ui/AppBar';
 
 import AppBar from './AppBar.jsx';
+import Footer from './Footer.jsx';
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -38,6 +38,7 @@ export default class App extends Component {
                         showBackBtn    = {this.props.location.pathname !== '/'}
                     />
                     {this.props.children}
+                    <Footer />
                 </div>
             </MuiThemeProvider>
         );
