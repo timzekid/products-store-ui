@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import MuiThemeProvider                from 'material-ui/styles/MuiThemeProvider';
 import injectTapEventPlugin            from 'react-tap-event-plugin';
 import getMuiTheme                     from 'material-ui/styles/getMuiTheme';
+// import AppBar from 'material-ui/AppBar';
+
+import AppBar from './AppBar.jsx';
 
 const muiTheme = getMuiTheme({
     palette: {
@@ -13,17 +16,29 @@ const muiTheme = getMuiTheme({
 
 export default class App extends Component {
     static propTypes = {
-        children : PropTypes.object
+        children : PropTypes.object.isRequired,
+        history  : PropTypes.object.isRequired,
+        location : PropTypes.object.isRequired
     };
 
     componentDidMount() {
         injectTapEventPlugin();
     }
 
+    handleBackBtnClick = () => {
+        this.props.history.push('/');
+    };
+
     render() {
         return (
             <MuiThemeProvider muiTheme={muiTheme} >
-                {this.props.children}
+                <div>
+                    <AppBar
+                        onBackBtnClick = {this.handleBackBtnClick}
+                        showBackBtn    = {this.props.location.pathname !== '/'}
+                    />
+                    {this.props.children}
+                </div>
             </MuiThemeProvider>
         );
     }
