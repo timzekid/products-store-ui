@@ -15,6 +15,7 @@ import ProductInteractionModal from '../../components/ProductInteractionModal.js
 @connect(mapStateToProps, mapDispatchToProps)
 export default class PaymentPageContainer extends Component {
     static propTypes = {
+        errorDuringAddition    : PropTypes.object.isRequired,
         productsList           : PropTypes.array.isRequired,
         isAddProductModalShown : PropTypes.bool.isRequired,
         productsTotalCount     : PropTypes.number,
@@ -46,6 +47,7 @@ export default class PaymentPageContainer extends Component {
                             title            = 'Add new product'
                             submitBtnLabel   = 'Add product'
                             cancelBtnLabel   = 'Cancel'
+                            error            = {this.props.errorDuringAddition}
                             onSubmitBtnClick = {this.props.addNewProductRequest}
                             onCancelBtnClick = {this.props.closeAddProductModal}
                         />
@@ -61,6 +63,7 @@ function mapStateToProps(state) {
     return {
         productsList           : state.products.productsList,
         productsTotalCount     : state.products.totalCount,
+        errorDuringAddition    : state.products.errorDuringAddition,
         isAddProductModalShown : state.modals.isAddProductModalShown
     };
 }

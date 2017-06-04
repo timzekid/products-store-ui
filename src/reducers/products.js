@@ -1,9 +1,11 @@
 import ActionTypes from '../constants/ActionTypes.js';
 import { formatProduct } from '../utils/apiResponseFormatter.js';
+import { formatError } from '../utils/errorFormatter.js';
 
 const DEFAULT_STATE = {
     productsList: [],
-    totalCount: 0
+    totalCount: 0,
+    errorDuringAddition: { isError: false }
 };
 
 export default function products(state = DEFAULT_STATE, action) {
@@ -22,6 +24,23 @@ export default function products(state = DEFAULT_STATE, action) {
             return { ...state };
         }
 
+
+        case ActionTypes.ADD_NEW_PRODUCT_FORMAT_ERROR: {
+            console.error(`${ActionTypes.ADD_NEW_PRODUCT_FORMAT_ERROR} error`, action.error);
+
+            const formattedError = formatError(action.error);
+
+            return {
+                ...state,
+                errorDuringAddition: formattedError
+            };
+        }
+        case ActionTypes.CLOSE_ADD_PRODUCT_MODAL: {
+            return {
+                ...state,
+                errorDuringAddition: { isError: false }
+            };
+        }
         case ActionTypes.ADD_NEW_PRODUCT_FAIL: {
             console.error(`${ActionTypes.ADD_NEW_PRODUCT_FAIL} error`, action.error);
 

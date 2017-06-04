@@ -14,6 +14,7 @@
     "babel-runtime": "^6.6.1",
     "classnames": "^2.2.5",
     "history": "^1.13.1",
+    "json-pointer": "^0.2.2",
     "keymirror": "^0.1.1",
     "material-ui": "^0.18.1",
     "mdi": "*",

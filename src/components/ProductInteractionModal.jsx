@@ -12,6 +12,7 @@ const BLUE_COLOR_LABEL = 'BLUE';
 
 export default class ProductInteractionModal extends Component {
     static propTypes = {
+        error            : PropTypes.object.isRequired,
         isOpen           : PropTypes.bool.isRequired,
         title            : PropTypes.string.isRequired,
         cancelBtnLabel   : PropTypes.string.isRequired,
@@ -47,7 +48,7 @@ export default class ProductInteractionModal extends Component {
     };
 
     render() {
-        const { onCancelBtnClick } = this.props;
+        const { error, onCancelBtnClick } = this.props;
 
         const actions = [
             <FlatButton
@@ -74,12 +75,14 @@ export default class ProductInteractionModal extends Component {
                     hintText          = 'My awesome product v2000'
                     floatingLabelText = 'Product name'
                     value             = {this.state.nameInputValue}
+                    errorText         = {error.isError ? error.data.name : null}
                     onChange          = {this.handleNameInputChange}
                 />
                 <TextField fullWidth
                     hintText          = 'The best product in the market'
                     floatingLabelText = 'Product description'
                     value             = {this.state.descriptionInputValue}
+                    errorText         = {error.isError ? error.data.description : null}
                     onChange          = {this.handleDescriptionInputChange}
                 />
                 <RadioButtonGroup
