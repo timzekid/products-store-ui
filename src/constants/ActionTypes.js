@@ -26,7 +26,7 @@ export default keyMirror({
     SHOW_PRODUCT_SUCCESS : undefined,
     SHOW_PRODUCT_FAIL    : undefined,
 
-    DELETE_PRODUCT_REQUEST: undefined,
-    DELETE_PRODUCT_SUCCESS: undefined,
-    DELETE_PRODUCT_FAIL: undefined
+    DELETE_PRODUCT_REQUEST : undefined,
+    DELETE_PRODUCT_SUCCESS : undefined,
+    DELETE_PRODUCT_FAIL    : undefined
 });

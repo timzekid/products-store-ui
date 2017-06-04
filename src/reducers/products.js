@@ -12,7 +12,6 @@ const DEFAULT_STATE = {
 };
 
 export default function products(state = DEFAULT_STATE, action) {
-    console.log('action', action);
     switch (action.type) {
         case ActionTypes.LIST_PRODUCTS_SUCCESS: {
             return {

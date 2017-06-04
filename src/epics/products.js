@@ -1,5 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
+import config      from '../config.js';
 import ActionTypes from '../constants/ActionTypes.js';
 
 export function listProductsRequest(action$, store) {
@@ -8,7 +9,7 @@ export function listProductsRequest(action$, store) {
           const limit = store.getState().products.limit;
           const offset = action.payload ? action.payload.offset : store.getState().products.offset;
 
-          return Observable.ajax.getJSON(`http://localhost:8080/api/v1/products?offset=${offset}&limit=${limit}`)
+          return Observable.ajax.getJSON(`${config.apiPrefix}/products?offset=${offset}&limit=${limit}`)
             .map(data => ({
                 type: ActionTypes.LIST_PRODUCTS_SUCCESS,
                 payload: { ...data }
@@ -29,7 +30,7 @@ export function addNewProductRequest(action$) {
                 body: JSON.stringify({ data: action.payload }),
                 method: 'POST',
                 responseType: 'json',
-                url: 'http://localhost:8080/api/v1/products',
+                url: `${config.apiPrefix}/products`,
                 headers: { 'Content-Type': 'application/json' }
             })
             .map(data => {
@@ -60,7 +61,7 @@ export function refetchProductsAfterAddition(action$, store) {
             const limit = store.getState().products.limit;
             const offset = store.getState().products.offset;
 
-            return Observable.ajax.getJSON(`http://localhost:8080/api/v1/products?offset=${offset}&limit=${limit}`)
+            return Observable.ajax.getJSON(`${config.apiPrefix}/products?offset=${offset}&limit=${limit}`)
               .map(data => ({
                   type: ActionTypes.LIST_PRODUCTS_SUCCESS,
                   payload: { ...data }
@@ -82,7 +83,7 @@ export function closeProductsModalAfterAddition(action$) {
 export function showProductRequest(action$) {
     return action$.ofType(ActionTypes.SHOW_PRODUCT_REQUEST)
       .switchMap((action) =>
-          Observable.ajax.getJSON(`http://localhost:8080/api/v1/products/${action.payload.id}`)
+          Observable.ajax.getJSON(`${config.apiPrefix}/products/${action.payload.id}`)
             .map(data => ({
                 type: ActionTypes.SHOW_PRODUCT_SUCCESS,
                 payload: { ...data }
@@ -101,7 +102,7 @@ export function deleteProductRequest(action$) {
       .switchMap(action =>
           Observable.ajax({
               method: 'DELETE',
-              url: `http://localhost:8080/api/v1/products/${action.payload.id}`
+              url: `${config.apiPrefix}/products/${action.payload.id}`
           })
             .map(data => ({
                 type: ActionTypes.DELETE_PRODUCT_SUCCESS,
@@ -123,7 +124,7 @@ export function updateProductRequest(action$) {
                 body: JSON.stringify({ data: action.payload }),
                 method: 'PUT',
                 responseType: 'json',
-                url: `http://localhost:8080/api/v1/products/${action.payload.id}`,
+                url: `${config.apiPrefix}/products/${action.payload.id}`,
                 headers: { 'Content-Type': 'application/json' }
             })
             .map(data => {
@@ -156,7 +157,7 @@ export function closeProductsModalAfterEdition(action$) {
 export function refetchProductAfterEdition(action$) {
     return action$.ofType(ActionTypes.UPDATE_PRODUCT_SUCCESS)
       .switchMap((action) =>
-          Observable.ajax.getJSON(`http://localhost:8080/api/v1/products/${action.payload.id}`)
+          Observable.ajax.getJSON(`${config.apiPrefix}/products/${action.payload.id}`)
             .map(data => ({
                 type: ActionTypes.SHOW_PRODUCT_SUCCESS,
                 payload: { ...data }

@@ -65,8 +65,6 @@ export default class ProductInteractionModal extends Component {
     render() {
         const { error, onCancelBtnClick } = this.props;
 
-        console.log('error', error);
-
         const actions = [
             <FlatButton
                 key        = {1}
