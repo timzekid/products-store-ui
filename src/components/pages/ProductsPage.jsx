@@ -30,16 +30,17 @@ export default class ProductsPage extends Component {
                         {
                             productsList.map(product =>
                                 <ProductCard
-                                    key={product.id}
-                                    name={product.name}
-                                    dateOfAddition={product.dateOfAddition}
+                                    key            = {product.id}
+                                    name           = {product.name}
+                                    description    = {product.description}
+                                    dateOfAddition = {product.dateOfAddition}
                                 />
                             )
                         }
                     </div>
                     <FloatingActionButton secondary
-                        className={styles.fab}
-                        onClick={onAddBtnClick}
+                        className = {styles.fab}
+                        onClick   = {onAddBtnClick}
                     >
                         <ContentAdd />
                     </FloatingActionButton>

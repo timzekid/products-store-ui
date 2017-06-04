@@ -7,6 +7,7 @@ import styles from './ProductCard.less';
 export default class ProductCard extends Component {
     static propTypes = {
         name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         dateOfAddition: PropTypes.string
     };
 
@@ -15,9 +16,10 @@ export default class ProductCard extends Component {
             <Paper className={styles.paper} >
                 <div className={styles.header}>
                     <h5>{this.props.name}</h5>
+                    <span className={styles.date}>{this.props.dateOfAddition}</span>
                 </div>
                 <div className={styles.content}>
-                    {this.props.dateOfAddition}
+                    {`${this.props.description.slice(0, 30)}...`}
                 </div>
                 <FlatButton
                     primary
