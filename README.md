@@ -26,12 +26,12 @@ $ npm install
 $ mongod
 ```
 
-4 - Run the server
+4 - Run the server (you should be in products-store-be folder)
 ```sh
 $ npm run nodemon
 ```
 
-5 - Run dev server
+5 - Run dev server (you should be in products-store-ui folder)
 ```sh
 $ cd ../products-store-ui
 $ npm run devserver
