@@ -11,9 +11,10 @@ $ git clone git@github.com:yaDaryStil/products-store-ui.git
 $ git clone git@github.com:yaDaryStil/products-store-be.git
 ```
 
-2 - Install dependencies via [npm](https://www.npmjs.com)
+2 - Install dependencies via [npm](https://www.npmjs.com) and add config for ui
 ```sh
 $ cd products-store-ui
+$ cp public/static/config.js.sample public/static/config.js
 $ npm install
 $ cd ../products-store-be
 $ npm install
